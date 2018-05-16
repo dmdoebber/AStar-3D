@@ -10,6 +10,17 @@ namespace aStar_3D
     {
         static void Main(string[] args)
         {
+            PathFinding p = new PathFinding(5, 5, 5);
+            List<Node> l = p.FindPath();
+
+            if(l != null)
+            {
+                Console.Write("\nCaminho = ");
+                for (int i = 0; i < l.Count; i++)
+                    Console.Write("(" + l[i].x + "," + l[i].y + "," + l[i].z + ")");
+            }
+
+            Console.ReadKey();
         }
     }
 }

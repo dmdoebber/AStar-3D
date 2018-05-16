@@ -8,9 +8,10 @@ namespace aStar_3D
 {
     class Node
     {
-        public  int   x, y, z;
-        public  int   gCost, hCost;
-        private bool  walkable;
+        public int  x, y, z;
+        public int  gCost, hCost;
+        public bool walkable;
+        public Node parent;
 
         public Node(int _x, int _y, int _z, bool _walkable, int _gCost)
         {
