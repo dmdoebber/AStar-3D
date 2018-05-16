@@ -20,7 +20,7 @@ namespace aStar_3D
         {
             int     peso = 0;
             bool    walkable;
-            Random  rnd = new Random();
+            Random  rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
             grid = new Node[sizeX, sizeY, sizeZ];
             
             for (int x = 0; x < sizeX; x++)
@@ -29,7 +29,7 @@ namespace aStar_3D
                 {
                     for(int z = 0; z < sizeY; z++)
                     {
-                        if (rnd.Next(0, 1) == 0) { walkable = false; }
+                        if (rnd.Next(0, 1) == 1) { walkable = false; }
                         else { walkable = true; peso = rnd.Next(1, 9); }
                         grid[x, y, z] = new Node(x, y, z, walkable, peso);
                     }

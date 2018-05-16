@@ -18,6 +18,7 @@ namespace aStar_3D
                 Console.Write("\nCaminho = ");
                 for (int i = 0; i < l.Count; i++)
                     Console.Write("(" + l[i].x + "," + l[i].y + "," + l[i].z + ")");
+                Console.Write("\nCusto total = "+l[l.Count-1].gCost);
             }
 
             Console.ReadKey();
