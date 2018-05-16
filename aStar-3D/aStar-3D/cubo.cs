@@ -27,7 +27,7 @@ namespace aStar_3D
             {
                 for(int y = 0; y < sizeY; y++)
                 {
-                    for(int z = 0; z < sizeY; z++)
+                    for(int z = 0; z < sizeZ; z++)
                     {
                         if (rnd.Next(2) == 1) { walkable = false; }
                         else { walkable = true; peso = rnd.Next(1, 9); }
