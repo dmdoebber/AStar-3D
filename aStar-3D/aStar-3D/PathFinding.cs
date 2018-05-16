@@ -42,17 +42,17 @@ namespace aStar_3D
                     if(openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)    
                         currentNode = openSet[i];    
 
-                //Console.Write("\nCurrent Node = (" + currentNode.x + "," + currentNode.y + "," + currentNode.z + ") ");
+                Console.Write("\nCurrent Node = (" + currentNode.x + "," + currentNode.y + "," + currentNode.z + ") ");
 
                 openSet.Remove(currentNode);
                 closedSet.Add(currentNode);
 
-                //Console.Write("\nclosedSet = {");
-                //foreach (Node CS in closedSet)
-                //{
-                //    Console.Write("(" + CS.x + "," + CS.y + "," + CS.z + ") ");
-                //}
-                //Console.Write("}\n");
+                Console.Write("\nclosedSet = {");
+                foreach (Node CS in closedSet)
+                {
+                    Console.Write("(" + CS.x + "," + CS.y + "," + CS.z + ") ");
+                }
+                Console.Write("}\n");
 
                 if (currentNode == targetNode)
                 {
@@ -81,12 +81,12 @@ namespace aStar_3D
                 }
 
                 //ARVORE DE BUSCA PRODUZIDA
-                //Console.Write("openSet = {");
-                //foreach (Node OS in openSet)
-                //{
-                //    Console.Write("(" + OS.x + "," + OS.y + "," + OS.z + ")["+OS.gCost+"] ");
-                //}
-                //Console.Write("}\n");
+                Console.Write("openSet = {");
+                foreach (Node OS in openSet)
+                {
+                    Console.Write("(" + OS.x + "," + OS.y + "," + OS.z + ")["+OS.gCost+"] ");
+                }
+                Console.Write("}\n");
             }
             Console.Write("\ncaminho não encontrado!");
             return null;
