@@ -18,9 +18,9 @@ namespace aStar_3D
 
         public void createGrid()
         {
-            int     peso = 0;
+            int peso = 0;
             bool    walkable;
-            Random  rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+            Random  rnd = new Random();
             grid = new Node[sizeX, sizeY, sizeZ];
             
             for (int x = 0; x < sizeX; x++)
@@ -29,7 +29,7 @@ namespace aStar_3D
                 {
                     for(int z = 0; z < sizeY; z++)
                     {
-                        if (rnd.Next(0, 1) == 1) { walkable = false; }
+                        if (rnd.Next(2) == 1) { walkable = false; }
                         else { walkable = true; peso = rnd.Next(1, 9); }
                         grid[x, y, z] = new Node(x, y, z, walkable, peso);
                     }
@@ -54,8 +54,7 @@ namespace aStar_3D
         public Node getNodeFromGrid(int posX, int posY, int posZ)
         {           
             if ((posX < sizeX && posX >= 0) && (posY < sizeY && posY >= 0) && (posZ < sizeZ && posZ >= 0))
-                if (grid[posX, posY, posZ].walkable)
-                    return grid[posX, posY, posZ];
+                return grid[posX, posY, posZ];     
             return null;
         }
     }

@@ -8,27 +8,32 @@ namespace aStar_3D
     class PathFinding
     {
         Cubo cubo;
-        bool PathSucess = false;
 
 		public PathFinding(int sizeX, int sizeY, int sizeZ)
         {
             cubo = new Cubo(sizeX, sizeY, sizeZ);
         }
 
-        public List<Node> FindPath()
+        public List<Node> FindPath(int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd)
         {
-            Node startNode = cubo.getNodeFromGrid(0, 0, 0);
-            Node targetNode = cubo.getNodeFromGrid(4, 4, 4);
+            Node startNode = cubo.getNodeFromGrid(xStart, yStart, zStart);
+            Node targetNode = cubo.getNodeFromGrid(xEnd, yEnd, zEnd);
 
+            //verifica se os pontos existem no cubo
             if (startNode == null)  { Console.Write("Ponto inicial invalido \n");  return null; }
             if (targetNode == null) { Console.Write("Ponto final invalido \n");    return null; }
 
+            //setando os pontos de inicio e fim para acessivel (o rand nao colabora para os testes)
+            startNode.walkable = true;
+            targetNode.walkable = true;
+
+            //lista de nodes fechados e abertos
             List <Node> openSet = new List<Node>();
             HashSet<Node> closedSet = new HashSet<Node>();
 
             openSet.Add(startNode);
-            Console.Write("raiz = ("+startNode.x+","+startNode.y+","+startNode.z+")\n");
 
+            //enquando existir 
             while (openSet.Count > 0)
             {
                 Node currentNode = openSet[0];
@@ -37,12 +42,19 @@ namespace aStar_3D
                     if(openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)    
                         currentNode = openSet[i];    
 
-                Console.Write("Current Node = (" + currentNode.x + "," + currentNode.y + "," + currentNode.z + ") ");
+                //Console.Write("\nCurrent Node = (" + currentNode.x + "," + currentNode.y + "," + currentNode.z + ") ");
 
                 openSet.Remove(currentNode);
                 closedSet.Add(currentNode);
 
-                if(currentNode == targetNode)
+                //Console.Write("\nclosedSet = {");
+                //foreach (Node CS in closedSet)
+                //{
+                //    Console.Write("(" + CS.x + "," + CS.y + "," + CS.z + ") ");
+                //}
+                //Console.Write("}\n");
+
+                if (currentNode == targetNode)
                 {
                     List<Node> path = new List<Node>();
                     for (Node currNode = targetNode; currNode != startNode; currNode = currNode.parent)
@@ -50,10 +62,10 @@ namespace aStar_3D
                     path.Reverse();
                     return path;
                 }
-                Console.Write("neighbours = {");
+                //Console.Write("neighbours = {");
                 foreach (Node neighbour in cubo.getNeighbours(currentNode))
                 {
-                    Console.Write("(" +neighbour.x + "," + neighbour.y + "," + neighbour.z + ") ");
+                    //Console.Write("(" +neighbour.x + "," + neighbour.y + "," + neighbour.z + ") ");
                     if (!neighbour.walkable || closedSet.Contains(neighbour))
                         continue;
                     int newMovementeCostToNeighbour = currentNode.gCost + neighbour.gCost;
@@ -65,11 +77,18 @@ namespace aStar_3D
 
                         if (!openSet.Contains(neighbour))
                             openSet.Add(neighbour);
-                    }
-                    
+                    }   
                 }
-                Console.Write("}\n");
+
+                //ARVORE DE BUSCA PRODUZIDA
+                //Console.Write("openSet = {");
+                //foreach (Node OS in openSet)
+                //{
+                //    Console.Write("(" + OS.x + "," + OS.y + "," + OS.z + ")["+OS.gCost+"] ");
+                //}
+                //Console.Write("}\n");
             }
+            Console.Write("\ncaminho não encontrado!");
             return null;
         }
 

@@ -10,8 +10,33 @@ namespace aStar_3D
     {
         static void Main(string[] args)
         {
-            PathFinding p = new PathFinding(5, 5, 5);
-            List<Node> l = p.FindPath();
+            Console.Write("Digite as dimencoes do cubo:\n");
+            Console.Write("X = ");
+            int sizeX = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Y = ");
+            int sizeY = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Z = ");
+            int sizeZ = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite a coordenada do ponto de saida:\n");
+            Console.Write("X = ");
+            int xStart = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Y = ");
+            int yStart = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Z = ");
+            int zStart = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite a coordenada do ponto de chegada:\n");
+            Console.Write("X = ");
+            int xEnd = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Y = ");
+            int yEnd = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Z = ");
+            int zEnd = Convert.ToInt32(Console.ReadLine());
+
+
+
+
+            PathFinding p = new PathFinding(sizeX, sizeY, sizeZ);
+            List<Node> l = p.FindPath(xStart, yStart, zStart, xEnd, yEnd, zEnd);
 
             if(l != null)
             {
